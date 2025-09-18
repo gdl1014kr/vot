@@ -35,3 +35,20 @@ DCF based tracking + scale estimation
 새로운 frame이 주어지면 standard translation filter를 사용하여 target의 translation tracking -> 학습된 scale filter(scale 변화에 의해 유도된 appearance variations를 직접 학습)를 target 위치에 적용하여 target의 scale을 정확하게 tracking(accuracy & robustness)
 
 fast DSST(fDSST) : DSST에 비해 속도 2배 향상, tracking 성능 크게 향상
+
+DSST: Scale filter와 각 scale sample의 correlation.
+- scale filter: target의 scale 변화를 추적하기 위해 학습된 1차원 filter.(각각의 scale 변화에 target의 appearance가 어떻게 변하는지 학습)
+- 이미지 내 위치에서의 적용: target의 현재 위치를 알고 있을 때, 해당 위치를 기준으로 다양한 크기의 이미지 패치(각 scale sample) 생성 -> 이 패치들을 scale filter에 입력하여 각 scale에 대한 correlation score 계산
+- correlation score: 각 scale sample과 학습된 scale filter 간의 일치 정도를 나타내는 점수. 점수가 높을수록 해당 scale이 현재 target 크기와 잘 맞는다는 의미.(여러 scale에 대한 correlation score를 비교하여 가장 높은 점수를 가진 sclae을 현재 대상의 크기로 추정)
+
+<img width="362" height="366" alt="image" src="https://github.com/user-attachments/assets/482c8c8b-01bb-4463-a379-1e389fddd1c7" />
+
+
+metric: overlap precision(OP), distance precision(DP) , FPS
+
+OTB dataset attribute:
+in-plane rotation, scale variation, out of view, background clutter, illumination variation, motion blur, fast motion, deformation, out-of-plane rotation, occlusion 및 low resolution
+
+vot2014 dataset attribute:
+camera motion, illumination change, occlusion, size change and motion change
+
