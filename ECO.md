@@ -52,7 +52,7 @@ DCF tracker에서 계산 복잡성과 과적합이 발생하는 이유:
 
 Contribution:
 
-1. factorized convolution operator: Factorized convolution operator: DCF 모델에서 파라미터 수를 대폭 감소시켜 복잡성 완화.
+1. factorized convolution operator: Factorized convolution operator: DCF 모델에서 필터 수 대비 불필요하거나 중복되는 파라미터 수를 대폭 감소시켜 복잡성 완화.
 2. Compact generative model of training sample distribution: 샘플 수를 효과적으로 줄이고 다양성을 유지하면서 메모리와 시간 복잡성을 줄임.
 3. Conservative model update strategy: tracking speed와 robustness을 동시에 향상시키는 효율적인 모델 업데이트 전략
 
