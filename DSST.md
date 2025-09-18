@@ -59,13 +59,13 @@ DSST: Scale filter와 각 scale sample의 correlation.
 
 <img width="362" height="366" alt="image" src="https://github.com/user-attachments/assets/482c8c8b-01bb-4463-a379-1e389fddd1c7" />
 
-입력: 현재 프레임 영상 \(I_t\), 이전 타겟 위치 \(p_{t-1}\), 이전 타겟 스케일 \(s_{t-1}\), 그리고 이전 시점의 번역 및 스케일 모델 매개변수들 \(A_{t-1,trans}\), \(B_{t-1,trans}\), \(A_{t-1,scale}\), \(B_{t-1,scale}\).
+input: 현재 frame 영상 \(I_t\), 이전 target 위치 \(p_{t-1}\), 이전 타겟 스케일 \(s_{t-1}\), 그리고 이전 시점의 번역 및 스케일 모델 매개변수들 \(A_{t-1,trans}\), \(B_{t-1,trans}\), \(A_{t-1,scale}\), \(B_{t-1,scale}\).
 
-1~3단계 (Translation estimation): 이전 위치 및 스케일에서 샘플 \(z_{t,trans}\)을 추출하고, 번역 필터를 적용해 상관점수 \(y_{t,trans}\)를 계산하여 타겟 위치 \(p_t\)를 업데이트합니다.
+1~3 (Translation estimation): 이전 위치 및 스케일에서 샘플 \(z_{t,trans}\)을 추출하고, 번역 필터를 적용해 상관점수 \(y_{t,trans}\)를 계산하여 타겟 위치 \(p_t\)를 업데이트합니다.
 
-4~6단계 (Scale estimation): 위치가 갱신된 후 해당 위치에서의 샘플 \(z_{t,scale}\)을 추출해 스케일 필터를 적용, 상관점수 \(y_{t,scale}\)를 계산하여 타겟 스케일 \(s_t\)를 업데이트합니다.
+4~6 (Scale estimation): 위치가 갱신된 후 해당 위치에서의 샘플 \(z_{t,scale}\)을 추출해 스케일 필터를 적용, 상관점수 \(y_{t,scale}\)를 계산하여 타겟 스케일 \(s_t\)를 업데이트합니다.
 
-7~9단계 (Model update): 새 위치와 스케일 정보로부터 훈련 샘플 \(f_{t,trans}\)와 \(f_{t,scale}\)을 추출하고, 각각의 필터 모델을 업데이트합니다.
+7~9 (Model update): 새 위치와 스케일 정보로부터 훈련 샘플 \(f_{t,trans}\)와 \(f_{t,scale}\)을 추출하고, 각각의 필터 모델을 업데이트합니다.
 
 metric: overlap precision(OP), distance precision(DP) , FPS
 
