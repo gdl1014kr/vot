@@ -28,9 +28,6 @@ CCOT는 연속적인 신호 처리, 다중 채널 특징 통합, 과거 샘플�
 => 높은 Accuary와 robustness 동시 달성하여 visual tracking 분야에서 중요한 기준점이 됨.
 
 
-
-
-
 CCOT는 기존 DCF가 가지던 이산적인 특징(discrete feature) 모델링의 한계를 극복.
 
 핵심 아이디어: feature와 correlation filter를 연속적인 영역(continuous domain)에서 모델링. 이 덕분에 sub-pixel 단위의 정확한 위치 추정이 가능해짐.
