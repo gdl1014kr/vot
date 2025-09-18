@@ -1,14 +1,3 @@
-DSST(Discriminative Scale Space Tracker)
-
-tracking을 위치 추정과 크기 추정이라는 두 가지 독립적인 문제로 분리하여 해결한 알고리즘
-
-위치 추정: 기존의 상관 필터를 사용하여 target의 위치를 추적
-
-크기 추정(Scale Estimation): 
-- target의 크기 변화에 특화된 별도의 1차원 상관 필터 사용
-- 이 필터는 **이미지 피라미드(Image Pyramid)**를 구성하여 각 스케일에서 추출한 특징에 상관 연산을 수행, 가장 높은 응답을 보이는 스케일을 target의 새로운 크기로 결정합니다.
-
-=> 이러한 분리형 접근 방식은 위치와 크기 변화에 모두 강인하게 대응하며, 추적 성능을 크게 향상.
 
 CCOT (Continuous Convolution Operation Tracker)
 
