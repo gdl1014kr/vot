@@ -1,15 +1,30 @@
 DSST(Discriminative Scale Space Tracker)
 
-tracking을 위치 추정과 크기 추정이라는 두 가지 독립적인 문제로 분리하여 해결한 알고리즘
+tracking을 위치 추정과 크기(scale) 추정을 분리하여 처리하는 알고리즘
 
-위치 추정: 기존의 상관 필터를 사용하여 target의 위치를 추적
+기존의 DCF tracker들은 주로 target의 위치 변화에만 집중하여, 크기 변화가 심한 환경에서는 tracking 성능이 저하되는 한계 발생.
 
-크기 추정(Scale Estimation): 
-- target의 크기 변화에 특화된 별도의 1차원 상관 필터 사용
-- 이 필터는 **이미지 피라미드(Image Pyramid)**를 구성하여 각 scale에서 추출한 특징에 상관 연산을 수행, 가장 높은 응답을 보이는 scale을 target의 새로운 크기로 결정.
+1. 위치 추정: 기존의 상관 필터를 사용하여 target의 위치를 추적
+- 역할: target의 위치 변화 추적
+- 원리: 일반적인 DCF 알고리즘과 동일하게, target의 외형 특징(ex: HOG feature)을 학습하여 target이 다음 frame에 어디에 위치할지 예측
 
-=> 이러한 분리형 접근 방식은 위치와 크기 변화에 모두 강인하게 대응하며, 추적 성능을 크게 향상.
+2. 크기 추정(Scale Estimation): 
+- 역할: target의 크기 변화 추적
+- 원리: target의 주변 영역을 다양한 Scale로 여러 장 겹쳐놓은 이미지 피라미드(image Pyramid) 생성 -> 각 Scale에서 이미지의 feature 추출 -> 별도의 1차원 Correlation filter를 적용하여 각 Scale에서 추출한 feature와 상관 연산 -> 가장 높은 응답을 보이는 Scale 찾아냄.(해당 Scale을 target의 새로운 크기로 결정.)
 
+=> 이 과정을 통해 target의 위치 변화와는 독립적으로, Scale 변화에만 집중하여 정확한 크기 추정
+
+DSST의 작동 방식
+
+1. 초기화: 첫 frame에서 target의 초기 위치와 Scale을 기반으로 위치 filter와 Scale filter를 각각 학습.
+
+2. 위치 예측: 다음 frame에서 위치 filter를 사용하여 target의 새로운 위치를 예측.
+
+3. 크기(Scale) 예측: 예측된 위치를 중심으로 이미지 피라미드 생성하고, Scale filter를 사용하여 가장 높은 응답을 보이는 target의 새로운 크기를 예측.
+
+4. 반복: 예측된 위치와 Scale을 바탕으로 filter를 업데이트하고 다음 frame에서 이 과정을 반복.
+
+이처럼 DSST는 위치와 Scale을 분리하여 추적함으로써, 위치와 Scale 변화에 모두 강인하게 대응. target의 Scale 변화가 심한 환경에서도 매우 안정적이고 정확한 성능 달성.
 
 
 Discriminative Scale Space Tracking(2017)
@@ -17,37 +32,45 @@ Discriminative Scale Space Tracking(2017)
 Abstract
 
 target의 정확한 scale estimation은 visual object tracking에서 어려운 연구 문제.
-=> 최첨단 방법: exhaustive scale search(완전 탐색 스케일 검색) 사용
-=> but, 큰 scale 변화 시 어려움, 계산 비용 많이 듦.
+=> 최첨단 방법: exhaustive scale search(완전 탐색 스케일 검색) 사용. but, 큰 scale 변화 시 어려움, 계산 비용 많이 듦.
 
-=> translation 및 scale estimation을 위해 DCF(Discriminative correlation filter) 학습.(target scale의 변화로 인해 발생하는 외형 변화를 직접 학습, 논문에서는 OTB(Online Tracking Benchmark), VOT2014 dataset 사용)
+=> translation 및 scale estimation을 위해 DCF(Discriminative correlation filter) 학습.(target scale의 변화로 인해 발생하는 외형 변화를 직접 학습)
 
+dataset: OTB(Online Tracking Benchmark), VOT2014 dataset 사용)
 
 Conclusion
 
-real-time visual tracking을 위한 accurate & robust한 scale estimation 문제 조사.
+translation 및 scale estimation을 위해 DCF(Discriminative correlation filter) 학습.
 explicit scale filter는 target scale 변화에 의해 유도된 외형 변화를 직접 학습.(정확도)
 계산 비용 줄임 => 속도 증가(real-time)
 
+=> real-time visual tracking을 위한 accurate & robust한 scale estimation
+
 OTB(Online Tracking Benchmark), VOT2014 dataset에서 다른 tracker 보다 성능 우수
 
+future work
+
+color information의 통합 => target deformations이 있는 시나리오에서 tracker의 성능 향상 예측.
+visual surveillance 시나리오에서 해당 tracker 사용.
 
 introduction
 
-generic(일반적인) visual object tracking => target의 초기 위치 정보만으로 image sequence 전체에서 target의 trajectory를 추정해야하는데 occlusions, appearance variations, motion blur, fast motion, scale variations 등의 요인으로 어려움.
+generic(일반적인) visual object tracking: target의 초기 위치 정보만으로 image sequence 전체에서 target의 trajectory를 추정. 
+but, occlusions, appearance variations, motion blur, fast motion, scale variations 등의 요인으로 어려움.
 
-target scale 변화 => 카메라 축 움직임, 외형 변화로 인해 생김.
+target scale variations => 카메라 축 움직임, appearance variations 등의 요인으로 발생.
 
-DCF 기반 => 계산 효율성으로 인한 real-time에 적합. 즉, DCF는 각 새로운 frame에서 target을 찾기 위함.
+DCF 기반 => 계산 효율성으로 인해 real-time에 적합. 즉, DCF는 각 새로운 frame에서 target을 찾기 위함.
 속도 향상 => 학습 및 감지 단계에서 고속 푸리에 변환(Fast Foruier transform, FFT)를 활용하여 얻을 수 있음.
 
 DCF based tracking + scale estimation 
-1. joint scale space filter
+1. joint scale space filter 
 2. multi-resolution translation filter
-=> 1,2 방식은 계산 비용 높아 real time에 부적합
+=> 1,2 방식은 계산 비용 높아 real time tracking에 부적합
 
-따라서 target의 위치와 크기를 더 정확하고 지속적으로 tracking 하는 Discriminative approach for scale adaptive visual tracking(DSST) 제안.
+=> 따라서 translation 및 scale estimation을 위해 target의 위치와 크기를 더 정확하고 지속적으로 tracking 하는 Discriminative approach for scale adaptive visual tracking(DSST) 제안. (DSST는 별도의 상관 필터 학습.)
 
+방식: 
 새로운 frame이 주어지면 standard translation filter를 사용하여 target의 translation tracking -> 학습된 scale filter(scale 변화에 의해 유도된 appearance variations를 직접 학습)를 target 위치에 적용하여 target의 scale을 정확하게 tracking(accuracy & robustness)
 
 fast DSST(fDSST) : DSST에 비해 속도 2배 향상, tracking 성능 크게 향상
@@ -56,6 +79,12 @@ DSST: Scale filter와 각 scale sample의 correlation.
 - scale filter: target의 scale 변화를 추적하기 위해 학습된 1차원 filter.(각각의 scale 변화에 target의 appearance가 어떻게 변하는지 학습)
 - 이미지 내 위치에서의 적용: target의 현재 위치를 알고 있을 때, 해당 위치를 기준으로 다양한 크기의 이미지 패치(각 scale sample) 생성 -> 이 패치들을 scale filter에 입력하여 각 scale에 대한 correlation score 계산
 - correlation score: 각 scale sample과 학습된 scale filter 간의 일치 정도를 나타내는 점수. 점수가 높을수록 해당 scale이 현재 target 크기와 잘 맞는다는 의미.(여러 scale에 대한 correlation score를 비교하여 가장 높은 점수를 가진 sclae을 현재 대상의 크기로 추정)
+
+
+
+
+
+
 
 <img width="362" height="366" alt="image" src="https://github.com/user-attachments/assets/482c8c8b-01bb-4463-a379-1e389fddd1c7" />
 
