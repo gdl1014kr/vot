@@ -38,16 +38,23 @@ DSST, CCOT, ECO 중 ECO가 가장 최신 기술. 뛰어난 성능과 효율성�
 ECO:Efficient Convolution Operators for Tracking(2017)
 
 Abstract:
-DCF 기반 방식(C-COT)의 복잡해진 모델과 많은 학습 파라미터로 인해 계산 복잡성 및 과적합 발생 -> 속도와 성능 동시 향상 목표, 속도 개선이 주 목표(정확도는 많이 향상됨)
+DCF 기반 방식(C-COT)의 복잡해진 모델과 많은 학습 파라미터로 인해 계산 복잡성 및 과적합 발생하여 속도 감소-> 논문에서는 속도와 성능 동시 향상 목표, 속도 개선이 주 목표(정확도는 많이 향상됨)
 dataset: VOT2016, UAV123, OTB-2015, TempleColor
 
+introduction:
+일반적인 visual tracking: target의 초기 위치 정보만으로 image sequence 전체에서 target의 trajectory를 추정.
+
+motivation:
+DCF tracker에서 계산 복잡성과 과적합이 발생하는 이유:
+1. 모델 크기
+2. 훈련 세트 크기
+3. 모델 업데이트
 
 Contribution:
 
-
 1. factorized convolution operator: Factorized convolution operator: DCF 모델에서 파라미터 수를 대폭 감소시켜 복잡성 완화.
-2. Compact generative model of training sample distribution: 샘플 종류 다양성을 유지하면서 메모리와 시간 복잡성을 줄임.
-3. Conservative model update strategy: 추적 속도와 견고성을 동시에 향상시키는 효율적인 모델 업데이트 전략
+2. Compact generative model of training sample distribution: 샘플 수를 효과적으로 줄이고 다양성을 유지하면서 메모리와 시간 복잡성을 줄임.
+3. Conservative model update strategy: tracking speed와 robustness을 동시에 향상시키는 효율적인 모델 업데이트 전략
 
 => 속도 최대 20배 향상, 성능 크게 개선
 
