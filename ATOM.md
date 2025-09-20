@@ -16,3 +16,20 @@ ATOM은 추적을 두 개의 독립적인 모듈로 분리하여, 상관 필터�
 
 1.2. 주요 특징
 ATOM은 빠른 분류기로 target을 찾고, 정밀한 회귀기로 크기를 예측하여, 속도와 정확도를 동시에 만족시키는 데 성공했습니다.
+
+
+ATOM: Accurate Tracking by Overlap Maximization(2019)
+
+Abstract
+
+- tracking의 robustness 큰 향상. but, accuary 발전 제한적.
+- 최근 tracking trend가 scale을 classfication함에 따라 정확한 target state estimation 간과됨.
+
+즉, 대부분의 tracker는 목표 bounding box를 estimate하기 위해 multi-scale search(다양한 크기와 비율의 후보 bounding box를 만들어 classfier에 적용하는 방식)
+
+=> 이는 다음과 같은 한계가 있음.
+1. target의 자세, 변형, 시점 변화 등 high-level적인 특징을 반영하지 못해 복잡한 target state estimation 한계. 즉, 정확도 문제.
+2. multi-scale search 방식은 계산 비용이 높음.
+
+이를 해결하기 위해 ATOM 방식 도입.
+ATOM은 multi-scale search 대신 IOU 예측 네트워크를 활용하여 목표 target과 후보 bounding box 간의 겹침(Overlap)을 예측하고, 이를 최대화 하는 방향으로 bounding box를 추정하여 더 정밀하고 효과적인 추적 달성
