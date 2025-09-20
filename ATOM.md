@@ -33,3 +33,19 @@ Abstract
 
 이를 해결하기 위해 ATOM 방식 도입.
 ATOM은 multi-scale search 대신 IOU 예측 네트워크를 활용하여 목표 target과 후보 bounding box 간의 겹침(Overlap)을 예측하고, 이를 최대화 하는 방향으로 bounding box를 추정하여 더 정밀하고 효과적인 추적 달성
+
+Introduction
+
+일반적인 visual tracking: target의 초기 위치 정보만으로 image sequence 전체에서 target의 trajectory를 추정.
+
+tracking은 크게 두 부분으로 나뉨.
+1. 분류(classfication): 이미지 내에서 target이 있는 위치를 대략적으로 찾음. 이미지 영역을 foreground(target), background로 구분
+=> tracking 중간에 물체의 모양이나 특징을 계속 학습하는 oneline learning 방식으로 동작.
+2. 추정(estimation): target의 위치와 scale을 나타내는 bounding box를 정확하게 계산하는 작업.
+=> offline training을 통해 미리 훈련되어, tracking target의 정확한 위치와 scale(bounding box)를 예측.
+
+즉, 추적은 목표가 어디에 있는지 대략적으로 찾고(classification), 그 위치를 좀 더 정확하게 조정(estimation)하는 두 단계로 구성
+
+backbone network: classfication, estimation 모두 ResNet-18 모델 사용
+dataset: NFS, UAV123, TrackingNet, LaSOT, VOT2018
+ATOM: PyTorch 기반 Python, GPU에서 구현
