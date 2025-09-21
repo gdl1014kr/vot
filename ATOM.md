@@ -28,7 +28,8 @@ Abstract
 
 이는 다음과 같은 한계 존재.
 1. target의 자세, 변형, 시점 및 조명 변화 등 high-level적인 특징을 반영하지 못해 복잡한 target state estimation 한계. 즉, 정확도 문제.
-=> 정확한 target estimation을 위해 광범위한 dataset을 통한 offline training에도 불구하고 
+=> 정확한 target estimation을 위해 광범위한 dataset을 통한 offline training이 필요함. 
+
 2. multi-scale search 방식은 계산 비용이 높음.
 
 이를 해결하기 위해 ATOM 방식 도입.
@@ -40,9 +41,10 @@ Introduction
 
 tracking은 크게 두 부분으로 나뉨.
 1. 분류(classfication): 이미지 내에서 target이 있는 위치를 대략적으로 찾음. 이미지 영역을 foreground(target), background로 구분
-=> tracking 중간에 물체의 모양이나 특징을 계속 학습하는 oneline learning 방식으로 동작.
+=> tracking 중간에 물체의 모양이나 특징을 계속 학습하는 oneline learning으로 target classification을 수행해 robust하게 distractor(방해 요소)를 구별하도록 하여 실시간 tracking accuracy와 robustness 확보.
+
 2. 추정(estimation): target의 위치와 scale을 나타내는 bounding box를 정확하게 계산하는 작업.
-=> offline training을 통해 미리 훈련되어, tracking target의 정확한 위치와 scale(bounding box)를 예측.
+=> 정확한 target estimation을 위해 광범위한 dataset을 통한 offline training이 필요함. offline training을 통해 미리 훈련되어, tracking target의 정확한 위치와 scale(bounding box)를 예측.
 
 즉, 추적은 목표가 어디에 있는지 대략적으로 찾고(classification), 그 위치를 좀 더 정확하게 조정(estimation)하는 두 단계로 구성
 
