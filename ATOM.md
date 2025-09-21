@@ -26,7 +26,7 @@ Abstract
 
 - 최근 사용하는 대부분의 tracker는 목표 bounding box를 estimate하기 위해 multi-scale search(다양한 크기와 비율의 후보 bounding box를 만들어 classfier에 적용하는 방식)를 사용하기 때문에 정확한 target state estimation이 어려움.
 
-=> 
+=> 다음과 같은 한계 존재.
 1. target의 자세, 변형, 시점 변화 등 high-level적인 특징을 반영하지 못해 복잡한 target state estimation 한계. 즉, 정확도 문제.
 2. multi-scale search 방식은 계산 비용이 높음.
 
