@@ -23,9 +23,8 @@ ATOM: Accurate Tracking by Overlap Maximization(2019)
 Abstract
 
 - 최근 visual tracking의 robustness 큰 향상. but, accuary 발전 제한적.
-- 최근 tracking trend가 scale을 classfication함에 따라 정확한 target state estimation 간과됨.
 
-즉, 대부분의 tracker는 목표 bounding box를 estimate하기 위해 multi-scale search(다양한 크기와 비율의 후보 bounding box를 만들어 classfier에 적용하는 방식)
+- 최근 사용하는 대부분의 tracker는 목표 bounding box를 estimate하기 위해 multi-scale search(다양한 크기와 비율의 후보 bounding box를 만들어 classfier에 적용하는 방식)를 사용하기 때문에 정확한 target state estimation이 어려움.
 
 => 이는 다음과 같은 한계가 있음.
 1. target의 자세, 변형, 시점 변화 등 high-level적인 특징을 반영하지 못해 복잡한 target state estimation 한계. 즉, 정확도 문제.
