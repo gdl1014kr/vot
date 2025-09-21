@@ -51,7 +51,17 @@ tracking은 크게 두 부분으로 나뉨.
 => 대규모 dataset으로 모델을 학습시키는 offline training 진행. 
 이를 통해 tracking target의 정확한 위치와 scale(bounding box)를 예측 가능.
 
-즉, 추적은 목표가 어디에 있는지 대략적으로 찾고(classification), 그 위치를 좀 더 정확하게 조정(estimation)하는 두 단계로 구성
+즉, tracking은 목표가 어디에 있는지 대략적으로 찾고(classification), 그 위치를 좀 더 정확하게 조정(estimation)하는 두 단계로 구성됨.
+
+ATOM tracker의 target classification module: 2-layer fully convolutional network head로 구성
+
+기존의 경사 하강법(Gradient Descent): oneline learning에 비효율적( 수렴 속도 느림)
+
+ATOM은 Conjugate Gradient 기반의 빠른 온라인 최적화 방법 사용
+=> 이 최적화 방법은 Gauss-Newton 근사 방식을 활용하여 효율적으로 파라미터를 업데이트하며, PyTorch 같은 딥러닝 프레임워크의 역전파(backpropagation)를 이용해 구현이 쉽다는 장점.
+
+tracking roop: target classfication -> target estimation -> model update
+=> 간단한 순환 구조로 인한 실시간 처리가 가능.
 
 backbone network: classfication, estimation 모두 ResNet-18 모델 사용
 dataset: NFS, UAV123, TrackingNet, LaSOT, VOT2018
