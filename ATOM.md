@@ -38,7 +38,7 @@ Introduction
 
 일반적인 visual tracking: target의 초기 위치 정보만으로 image sequence 전체에서 target의 trajectory를 추정.
 
-tracking은 크게 두 부분으로 나뉨.
+논문에서는 tracking을 크게 두 부분으로 나누어 진행.
 1. 분류(classfication): 
 - 이미지 내에서 target이 있는 위치를 대략적으로 찾음.
 - 이미지 영역을 foreground(target), background로 구분
@@ -50,6 +50,7 @@ tracking은 크게 두 부분으로 나뉨.
 - 정확한 target estimation을 위해 미리 학습된 모델이 필요함.
 => 대규모 dataset으로 모델을 학습시키는 offline training 진행. 
 이를 통해 tracking target의 정확한 위치와 scale(bounding box)를 예측 가능.
+- target의 자세, 변형, 시점 및 조명 변화 등 high-level적인 상황에서도 정확한 tracking을 하기 위함.
 
 즉, tracking은 목표가 어디에 있는지 대략적으로 찾고(classification), 그 위치를 좀 더 정확하게 조정(estimation)하는 두 단계로 구성됨.
 
