@@ -32,7 +32,7 @@ Abstract
 2. multi-scale search 방식은 계산 비용이 높음.
 
 이를 해결하기 위해 ATOM 방식 도입.
-ATOM은 multi-scale search 대신 IOU 예측 네트워크를 활용하여 목표 target과 후보 bounding box 간의 겹침(Overlap)을 예측하고, 이를 최대화 하는 방향으로 bounding box를 추정하여 더 정밀하고 효과적인 추적 달성
+ATOM은 multi-scale search 대신 IOU 예측 네트워크를 활용하여 목표 target과 후보 bounding box 간의 겹침(Overlap)을 예측하고, 이를 최대화하여 bounding box를 추정하여 더 정밀하고 효과적인 추적 달성
 
 Introduction
 
