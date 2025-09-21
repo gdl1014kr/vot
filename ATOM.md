@@ -47,9 +47,8 @@ Introduction
 
 2. 추정(estimation): 
 - target의 위치와 scale을 나타내는 bounding box를 정확하게 계산하는 작업.
-- 정확한 target estimation을 위해 미리 학습된 모델이 필요함.
-=> 대규모 dataset으로 모델을 학습시키는 offline training 진행. 
-이를 통해 tracking target의 정확한 위치와 scale(bounding box)를 예측 가능.
+- classification 단계에서 distractor 한 상황에서는 실시간으로 정확한 target estimation이 어렵기 때문에 대규모 dataset으로 미리 학습된 모델이 필요함.(offline training)
+=> 이를 통해 tracking target의 정확한 위치와 scale(bounding box)를 예측 가능.
 - target의 자세, 변형, 시점 및 조명 변화 등 high-level적인 상황에서도 정확한 tracking을 하기 위함.
 
 즉, tracking은 목표가 어디에 있는지 대략적으로 찾고(classification), 그 위치를 좀 더 정확하게 조정(estimation)하는 두 단계로 구성됨.
