@@ -24,13 +24,12 @@ Abstract
 
 - 최근 visual tracking의 robustness 큰 향상. but, accuary 발전 제한적.
 
-- 최근 사용하는 대부분의 tracker는 목표 bounding box를 estimate하기 위해 multi-scale search(다양한 크기와 비율의 후보 bounding box를 만들어 classfier에 적용하는 방식)를 사용하기 때문에 정확한 target state estimation이 어려움.
+- 최근 tracking은 tracker가 목표 bounding box를 estimate하기 위해 multi-scale search(다양한 크기와 비율의 후보 bounding box를 만들어 classfier에 적용하는 방식) 방시에 집중하여 정확한 target state estimation이 어렵다는 한계 존재.
 
-이는 다음과 같은 한계 존재.
 1. target의 자세, 변형, 시점 및 조명 변화 등 high-level적인 특징을 반영하지 못해 복잡한 target state estimation 한계. 즉, 정확도 문제.
 => 정확한 target estimation을 위해 광범위한 dataset을 통한 offline training이 필요함. 
 
-2. multi-scale search 방식은 계산 비용이 높음.
+2. multi-scale search 방식은 계산 비용이 높아 실시간성 떨어짐.
 
 이를 해결하기 위해 ATOM 방식 도입.
 ATOM은 multi-scale search 대신 IOU 예측 네트워크를 활용하여 목표 target과 후보 bounding box 간의 겹침(Overlap)을 예측하고, 이를 최대화하여 bounding box를 추정하여 더 정밀하고 효과적인 추적 달성
