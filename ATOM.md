@@ -40,11 +40,17 @@ Introduction
 일반적인 visual tracking: target의 초기 위치 정보만으로 image sequence 전체에서 target의 trajectory를 추정.
 
 tracking은 크게 두 부분으로 나뉨.
-1. 분류(classfication): 이미지 내에서 target이 있는 위치를 대략적으로 찾음. 이미지 영역을 foreground(target), background로 구분
-=> tracking 실행 중에 모델을 업데이트하여 물체의 모양이나 특징을 계속 학습하는 방식인 oneline learning으로 target classification을 수행해 robust하게 distractor(방해 요소)를 구별하도록 하여 실시간 tracking accuracy와 robustness 확보.
+1. 분류(classfication): 
+- 이미지 내에서 target이 있는 위치를 대략적으로 찾음.
+- 이미지 영역을 foreground(target), background로 구분
+- tracking 실행 중에 현재 frame 정보를 이용해 모델을 실시간으로 업데이트하는 oneline learning 수행.
+=> 이를 통해 물체의 모양이나 특징을 계속 학습하며, distractor(방해 요소)를 robust하게 구별하여 실시간으로 tracking accuracy와 robustness 확보.
 
-2. 추정(estimation): target의 위치와 scale을 나타내는 bounding box를 정확하게 계산하는 작업.
-=> 정확한 target estimation을 위해 대규모 dataset을 통한 모델을 학습시키는 offline training이 필요함. offline training을 통해 미리 훈련되어, tracking target의 정확한 위치와 scale(bounding box)를 예측.
+2. 추정(estimation): 
+- target의 위치와 scale을 나타내는 bounding box를 정확하게 계산하는 작업.
+- 정확한 target estimation을 위해 미리 학습된 모델이 필요함.
+=> 대규모 dataset으로 모델을 학습시키는 offline training 진행. 
+이를 통해 tracking target의 정확한 위치와 scale(bounding box)를 예측 가능.
 
 즉, 추적은 목표가 어디에 있는지 대략적으로 찾고(classification), 그 위치를 좀 더 정확하게 조정(estimation)하는 두 단계로 구성
 
