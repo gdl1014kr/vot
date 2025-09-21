@@ -1,22 +1,22 @@
 1. ATOM (Accurate Tracking by Overlap Maximization)
-ATOM은 추적을 두 개의 독립적인 모듈로 분리하여, 상관 필터의 빠른 속도와 딥러닝의 높은 정확도를 결합한 하이브리드 추적기입니다. 이 이원화(two-stage) 전략이 ATOM의 핵심입니다.
+ATOM은 tracking을 두 개의 독립적인 모듈로 분리하여, correlation filter의 빠른 속도와 deep learning의 높은 정확도를 결합한 tracker.
 
-1.1. ATOM의 핵심 모듈
+ATOM의 핵심 모듈
+
 분류기(Classifier) 모듈:
 
-역할: target의 대략적인 위치를 빠르게 찾는 역할을 합니다.
+- image 내에서 target의 대략적인 위치를 빠르게 찾는 역할.
 
-기술: 상관 필터의 원리를 활용하여, target의 외형 특징(feature)을 학습한 필터를 통해 다음 프레임에서 target의 위치를 예측합니다. 이 모듈은 계산이 매우 효율적이어서 실시간 추적의 기반이 됩니다.
+- 이미지 영역을 foreground(target), background(배경)로 구분
+=> tracking 중간에 물체의 모양이나 특징을 계속 학습하는 oneline learning 방식으로 동작.
 
-회귀기(Regressor) 모듈:
+- correlation filter의 원리를 활용하여, target의 외형 feature을 학습한 필터를 통해 다음 frame에서 target의 위치 예측. 계산 효율성 높아 실시간 tracking에 적합.
 
-역할: target의 정확한 **크기(scale)**와 **종횡비(aspect ratio)**를 정밀하게 예측합니다.
+추정(estimation) 회귀기(Regressor) 모듈:
 
-기술: 오프라인에서 대량의 데이터를 학습한 **작은 딥러닝 네트워크(DNN)**를 사용합니다. 이 네트워크는 분류기 모듈이 찾은 위치를 기반으로 target의 경계 박스(Bounding Box)를 최종적으로 정밀하게 조정합니다.
+- target의 정확한 크기(scale)와 종횡비(aspect ratio)를 정밀하게 예측하는 역할.
 
-1.2. 주요 특징
-ATOM은 빠른 분류기로 target을 찾고, 정밀한 회귀기로 크기를 예측하여, 속도와 정확도를 동시에 만족시키는 데 성공했습니다.
-
+- offline training을 통해 대량의 데이터를 학습한 작은 딥러닝 네트워크(DNN) 사용. 이 네트워크는 Classifier 모듈이 찾은 target의 위치를 기반으로 target의 bounding box 예측.
 
 ATOM: Accurate Tracking by Overlap Maximization(2019)
 
