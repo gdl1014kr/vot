@@ -43,7 +43,7 @@ Introduction
 - 이미지 내에서 target이 있는 위치를 대략적으로 찾음.
 - 이미지 영역을 foreground(target), background로 구분
 - tracking 실행 중에 현재 frame 정보를 이용해 모델을 실시간으로 업데이트하는 oneline learning 수행.
-=> 이를 통해 물체의 모양이나 특징을 계속 학습하며, distractor(방해 요소)를 robust하게 구별하여 실시간으로 tracking accuracy와 robustness 확보.
+=> 이를 통해 물체의 모양이나 특징을 계속 학습하며, distractor(Viewpoint Change, pose 등)를 robust하게 구별하여 실시간으로 tracking accuracy와 robustness 확보.
 
 2. 추정(estimation): 
 - target의 위치와 scale을 나타내는 bounding box를 정확하게 계산하는 작업.
@@ -55,6 +55,7 @@ Introduction
 즉, tracking은 목표가 어디에 있는지 대략적으로 찾고(classification), 그 위치를 좀 더 정확하게 조정(estimation)하는 두 단계로 구성됨.
 
 ATOM tracker의 target classification module: 2-layer fully convolutional network head로 구성
+=> 매우 가볍고 연산량이 적음.
 
 기존의 경사 하강법(Gradient Descent): oneline learning에 비효율적( 수렴 속도 느림)
 
