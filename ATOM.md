@@ -55,8 +55,18 @@ Introduction
 => high-level 특징과 target의 구체적인 정보를 modulation 방식으로 통합하여 학습함으로써 target의 위치와 scale(bounding box)를 보다 정확하게 예측.
 - target의 자세, 변형, 시점 및 조명 변화 등 high-level적인 상황에서도 정확한 tracking을 하기 위함.
 - target과 추정된 bounding box 간의 IOU(Intersection over Union) 값을 예측하는 네트워크(IOU-predictor)를 기반으로 함.
+=> IOU-predictor는 4가지의 입력을 받음.
+1. 현재 frame의 backbone feature
+2. 현재 frame의 bounding box estimate
+3. reference frame의 backbone feature
+4. reference frame에서의 target bounding box
 
 즉, tracking은 목표가 어디에 있는지 대략적으로 찾고(classification), 그 위치를 좀 더 정확하게 조정(estimation)하는 두 단계로 구성됨.
+
+Unified Multi-Task Network Architecture
+- 두 module이 동일한 backbone network(ResNet-18)에서 feature을 공유하나, 서로 다른 head network를 가짐.
+- classification와 estimation을 명확히 분리하면서도 효율적으로 통합된 tracking framework 구현.
+
 
 기존의 경사 하강법(Gradient Descent): oneline learning에 비효율적(수렴 속도 느림)
 
