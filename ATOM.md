@@ -16,7 +16,7 @@ estimation(추정) module:
 
 - target의 정확한 크기(scale)와 종횡비(aspect ratio)를 정밀하게 예측하는 역할.
 
-- offline training을 통해 대량의 데이터를 학습한 작은 딥러닝 네트워크(DNN) 사용. 이 네트워크는 Classifier 모듈이 찾은 target의 위치를 기반으로 target의 bounding box 예측.
+- offline training을 통해 대량의 데이터를 사전 학습한 작은 딥러닝 네트워크(DNN) 사용. 이 네트워크는 Classifier 모듈이 찾은 target의 위치를 기반으로 target의 bounding box 예측.
 
 ATOM: Accurate Tracking by Overlap Maximization(2019)
 
@@ -41,22 +41,24 @@ Introduction
 논문에서는 tracking을 크게 두 부분으로 나누어 진행.
 1. 분류(classfication): 
 - 이미지 내에서 target이 있는 위치를 대략적으로 찾음.
-- 이미지 영역을 foreground(target), background로 구분
+- network head(신경망의 분류 헤드)가 이미지 frame에서 foreground(target), background로 구분하는 confidence score(신뢰도) 계산.
 - tracking 실행 중에 현재 frame 정보를 이용해 모델을 실시간으로 업데이트하는 oneline learning 수행.
 => 이를 통해 물체의 모양이나 특징을 계속 학습하며, distractor(Viewpoint Change, pose 등)를 robust하게 구별하여 실시간으로 tracking accuracy와 robustness 확보.
+- ATOM tracker의 target classification module: 2-layer fully convolutional network head로 구성
+=> 매우 가볍고 연산량이 적음.(고속 추론 가능, 실시간성 보장)
+
 
 2. 추정(estimation): 
 - target의 위치와 scale을 나타내는 bounding box를 정확하게 계산하는 작업.
-- classification 단계에서 distractor 한 상황에서는 실시간으로 정확한 target estimation이 어렵기 때문에 대규모 dataset으로 미리 학습된 모델이 필요함.(offline training)
-=> 이를 통해 tracking target의 정확한 위치와 scale(bounding box)를 예측 가능.
+- classification 단계에서 distractor 한 상황에서는 실시간으로 정확한 target estimation이 어렵기 때문에 대규모 dataset으로 사전 학습된 모델이 필요함.(offline training)
+=> offline 대규모 dataset에서 학습되어 tracking 시에는 가중치가 고정되어 빠르고 안정적인 추정.
+=> high-level 특징과 target의 구체적인 정보를 modulation 방식으로 통합하여 학습함으로써 target의 위치와 scale(bounding box)를 보다 정확하게 예측.
 - target의 자세, 변형, 시점 및 조명 변화 등 high-level적인 상황에서도 정확한 tracking을 하기 위함.
+- target과 추정된 bounding box 간의 IOU(Intersection over Union) 값을 예측하는 네트워크(IOU-predictor)를 기반으로 함.
 
 즉, tracking은 목표가 어디에 있는지 대략적으로 찾고(classification), 그 위치를 좀 더 정확하게 조정(estimation)하는 두 단계로 구성됨.
 
-ATOM tracker의 target classification module: 2-layer fully convolutional network head로 구성
-=> 매우 가볍고 연산량이 적음.
-
-기존의 경사 하강법(Gradient Descent): oneline learning에 비효율적( 수렴 속도 느림)
+기존의 경사 하강법(Gradient Descent): oneline learning에 비효율적(수렴 속도 느림)
 
 ATOM은 Conjugate Gradient 기반의 빠른 온라인 최적화 방법 사용
 => 이 최적화 방법은 Gauss-Newton 근사 방식을 활용하여 효율적으로 파라미터를 업데이트하며, PyTorch 같은 딥러닝 프레임워크의 역전파(backpropagation)를 이용해 구현이 쉽다는 장점.
