@@ -1,9 +1,9 @@
 1. ATOM (Accurate Tracking by Overlap Maximization)
 ATOM은 tracking을 두 개의 독립적인 모듈로 분리하여, correlation filter의 빠른 속도와 deep learning의 높은 정확도를 결합한 tracker.
 
-ATOM의 핵심 모듈
+ATOM의 핵심 module
 
-분류기(Classifier) 모듈:
+Classifier(분류기) module:
 
 - image 내에서 target의 대략적인 위치를 빠르게 찾는 역할.
 
@@ -12,7 +12,7 @@ ATOM의 핵심 모듈
 
 - correlation filter의 원리를 활용하여, target의 외형 feature을 학습한 필터를 통해 다음 frame에서 target의 위치 예측. 계산 효율성 높아 실시간 tracking에 적합.
 
-추정(estimation) 회귀기(Regressor) 모듈:
+estimation(추정) module:
 
 - target의 정확한 크기(scale)와 종횡비(aspect ratio)를 정밀하게 예측하는 역할.
 
