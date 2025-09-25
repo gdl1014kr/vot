@@ -1,4 +1,4 @@
-2. DiMP (Discriminative Model Prediction)
+DiMP (Discriminative Model Prediction)
 DiMP는 ATOM의 아이디어를 더욱 발전시켜, 필터 학습 과정 자체를 딥러닝 기반으로 최적화한 알고리즘입니다. DiMP의 목표는 target을 배경으로부터 가장 강력하게 구별할 수 있는 **'판별 필터(discriminative filter)'**를 학습하는 것입니다.
 
 2.1. DiMP의 핵심 모듈
