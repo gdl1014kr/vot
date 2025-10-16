@@ -1,5 +1,6 @@
 1. ATOM (Accurate Tracking by Overlap Maximization)
 ATOM은 tracking을 두 개의 독립적인 모듈로 분리하여, correlation filter의 빠른 속도와 deep learning의 높은 정확도를 결합한 tracker.
+다양한 환경과 조건에서 target의 bounding box를 더 정확하게 최대화하여 예측하는 것을 목표. 위치, 크기, 자세 변화 등 동적 상황에서도 잘 적응.
 
 ATOM의 핵심 module
 
@@ -14,9 +15,11 @@ Classifier(분류기) module:
 
 estimation(추정) module:
 
-- target의 정확한 크기(scale)와 종횡비(aspect ratio)를 정밀하게 예측하는 역할.
+- target의 정확한 크기(scale)와 종횡비(aspect ratio)를 정밀하게 예측하는 역할. => target의 상태 추정.
 
 - offline training을 통해 대량의 데이터를 사전 학습한 작은 딥러닝 네트워크(DNN) 사용. 이 네트워크는 Classifier 모듈이 찾은 target의 위치를 기반으로 target의 bounding box 예측.
+
+- bounding box 추정은 target의 자세에 대한 high-level의 이해를 필요하기 때문에 어려운 작업.
 
 ATOM: Accurate Tracking by Overlap Maximization(2019)
 
