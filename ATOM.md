@@ -1,5 +1,6 @@
 1. ATOM (Accurate Tracking by Overlap Maximization)
 ATOM은 tracking을 두 개의 독립적인 모듈로 분리하여, correlation filter의 빠른 속도와 deep learning의 높은 정확도를 결합한 tracker.
+feature 추출: ImageNet에서 사전 훈련된 ResNet-18을 backbone network로 사용하여 추출. => 추정된 target 크기의 5배에 해당하는 이미지 영역에서 288x288 크기의 패치에서 추출. 모든 프레임에서 단일 이미지 패치에만 수행.
 다양한 환경과 조건에서 target의 bounding box를 더 정확하게 최대화하여 예측하는 것을 목표. 위치, 크기, 자세 변화 등 동적 상황에서도 잘 적응.
 
 ATOM의 핵심 module
@@ -80,6 +81,6 @@ ATOM은 Conjugate Gradient 기반의 빠른 온라인 최적화 방법 사용
 tracking roop: target classfication -> target estimation -> model update
 => 간단한 순환 구조로 인한 실시간 처리가 가능.
 
-backbone network: classfication, estimation 모두 ResNet-18 모델 사용 => target estimation은 IOU-predictor network에 의해 수
+backbone network: classfication, estimation 모두 ResNet-18 모델 사용 => target estimation은 IOU-predictor network
 dataset: NFS, UAV123, TrackingNet, LaSOT, VOT2018
 ATOM: PyTorch 기반 Python, GPU에서 구현
