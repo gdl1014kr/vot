@@ -18,6 +18,7 @@ estimation(추정) module:
 - target의 정확한 크기(scale)와 종횡비(aspect ratio)를 정밀하게 예측하는 역할. => target의 상태 추정.
 
 - offline training을 통해 대량의 데이터를 사전 학습한 작은 딥러닝 네트워크(DNN) 사용. 이 네트워크는 Classifier 모듈이 찾은 target의 위치를 기반으로 target의 bounding box 예측.
+=> 각 frame에서 예측된 iou overlap을 최대화하여 target bounding box 찾음
 
 - bounding box 추정은 target의 자세에 대한 high-level의 이해를 필요하기 때문에 어려운 작업.
 
@@ -35,7 +36,7 @@ Abstract
 2. multi-scale search 방식은 계산 비용이 높아 실시간성 떨어짐.
 
 이를 해결하기 위해 ATOM 방식 도입.
-ATOM은 multi-scale search 대신 IOU 예측 네트워크를 활용하여 목표 target과 후보 bounding box 간의 겹침(Overlap)을 예측하고, 이를 최대화하여 bounding box를 추정하여 더 정밀하고 효과적인 추적 달성
+ATOM은 multi-scale search 대신 IOU 예측 네트워크(iou-net)를 활용하여 목표 target과 후보 bounding box 간의 겹침(Overlap)을 예측하고, 이를 최대화하여 bounding box를 추정하여 더 정밀하고 효과적인 추적 달성
 
 Introduction
 
@@ -79,6 +80,6 @@ ATOM은 Conjugate Gradient 기반의 빠른 온라인 최적화 방법 사용
 tracking roop: target classfication -> target estimation -> model update
 => 간단한 순환 구조로 인한 실시간 처리가 가능.
 
-backbone network: classfication, estimation 모두 ResNet-18 모델 사용
+backbone network: classfication, estimation 모두 ResNet-18 모델 사용 => target estimation은 IOU-predictor network에 의해 수
 dataset: NFS, UAV123, TrackingNet, LaSOT, VOT2018
 ATOM: PyTorch 기반 Python, GPU에서 구현
