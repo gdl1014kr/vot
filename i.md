@@ -24,4 +24,10 @@ export PYTHONPATH=$(pwd) # 반드시 pytracking 루트 디렉터리에서 실행
 python run_webcam.py tracker_name parameter_name (## ex: python run_webcam.py dimp dimp50)
 
 ## Run the tracker on some dataset sequence => This is done using the run_tracker script.
-python run_tracker.py tracker_name parameter_name --dataset_name dataset_name --sequence sequence --debug debug --threads threads (## ex: python run_tracker.py dimp dimp50 uav
+python run_tracker.py tracker_name parameter_name --dataset_name dataset_name --sequence sequence --debug debug --threads threads (## ex: python run_tracker.py dimp dimp50 uav --sequence bike1 --debug 1)
+
+## Run the tracker on a set of datasets 
+python run_experiment.py experiment_module experiment_name --dataset_name dataset_name --sequence sequence  --debug debug --threads threads
+
+## Run the tracker on a video file => This is done using the run_video script.
+python run_video.py tracker_name parameter_name videofile --optional_box optional_box --debug debug (## ex: python run_video.py dimp dimp50 /home/username/my_video.mp4 --optional_box [150,200,75,100] --debug 1) => 자동
