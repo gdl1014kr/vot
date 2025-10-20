@@ -16,3 +16,12 @@ conda activate pytracking
 
 ## PYTHONPATH 설정
 export PYTHONPATH=$(pwd) # 반드시 pytracking 루트 디렉터리에서 실행
+
+
+# 2. Pytracking - for implementing my tracker
+
+## Run the tracker on webcam feed => select the object to track by drawing a bounding box. Note: It is possible to select multiple targets to track!
+python run_webcam.py tracker_name parameter_name (## ex: python run_webcam.py dimp dimp50)
+
+## Run the tracker on some dataset sequence => This is done using the run_tracker script.
+python run_tracker.py tracker_name parameter_name --dataset_name dataset_name --sequence sequence --debug debug --threads threads (## ex: python run_tracker.py dimp dimp50 uav
