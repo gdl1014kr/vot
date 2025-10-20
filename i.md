@@ -8,3 +8,9 @@ bash install.sh conda_install_path pytracking # which conda 하여 경로 조회
 
 # 실행
 ./install.sh /home/username/anaconda3 pytracking
+
+# Conda 환경 활성화
+conda activate pytracking 
+
+# PYTHONPATH 설정
+export PYTHONPATH=$(pwd) # 반드시 pytracking 루트 디렉터리에서 실행
