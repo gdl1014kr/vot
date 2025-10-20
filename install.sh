@@ -6,7 +6,7 @@ if [ "$#" -ne 2 ]; then
 fi
 
 conda_install_path=$1
-conda_env_name=pytracking
+conda_env_name=$2
 
 source $conda_install_path/etc/profile.d/conda.sh
 
