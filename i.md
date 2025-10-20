@@ -1,4 +1,4 @@
-# installation
+# 1. installation
 
 git clone https://github.com/visionml/pytracking.git
 cd pytracking
