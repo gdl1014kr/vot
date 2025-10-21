@@ -23,6 +23,8 @@ conda activate pytracking
 ## PYTHONPATH 설정
 export PYTHONPATH=$(pwd) # 반드시 pytracking 루트 디렉터리에서 실행
 
+## timm 설치
+pip install timm==0.6.13
 
 # 2. Pytracking - for implementing my tracker
 
