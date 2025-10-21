@@ -28,7 +28,8 @@ conda install -y -c conda-forge gcc=8 gxx=8
 echo ""
 echo ""
 echo "****************** Installing pytorch with cuda10 ******************"
-conda install -y pytorch==1.4.0 torchvision==0.5.0 cudatoolkit=10.1 -c pytorch
+conda install pytorch==1.2.0 torchvision==0.4.0 cudatoolkit=10.0 -c pytorch
+
 
 echo ""
 echo ""
