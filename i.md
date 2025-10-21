@@ -5,6 +5,7 @@ cd pytracking
 git submodule update --init
 
 ## https://www.anaconda.com/download/success 에서 conda 설치 
+cd ~
 cd ~/Downloads
 bash Anaconda3-2025.06-0-Linux-x86_64.sh
 source ~/.bashrc
