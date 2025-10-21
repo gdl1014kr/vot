@@ -29,6 +29,12 @@ pip install timm==0.6.13
 # 2. Pytracking - for implementing my tracker
 
 ## Run the tracker on webcam feed => select the object to track by drawing a bounding box. Note: It is possible to select multiple targets to track!
+### (필수) 시스템 CUDA 경로 간섭 방지
+unset LD_LIBRARY_PATH
+
+### (필수) pytracking 라이브러리 경로 설정
+export PYTHONPATH=$(pwd)
+
 python run_webcam.py tracker_name parameter_name (## ex: python run_webcam.py dimp dimp50)
 
 ## Run the tracker on some dataset sequence => This is done using the run_tracker script.
