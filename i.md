@@ -37,8 +37,8 @@ export PYTHONPATH=$(pwd)
 
 python run_webcam.py tracker_name parameter_name (## ex: python run_webcam.py dimp dimp50)
 
-## Run the tracker on some dataset sequence => This is done using the run_tracker script.
-python run_tracker.py tracker_name parameter_name --dataset_name dataset_name --sequence sequence --debug debug --threads threads (## ex: python run_tracker.py dimp dimp50 uav --sequence bike1 --debug 1)
+## Run the tracker on some dataset sequence => This is done using the run_tracker script. => local.py에서 path 수정(ex: anno, data_seq 폴더 경로 직전까지 지정. dataset이 uav라면, settings.uav_path = '/home/dl/pytracking/pytracking/UAV123' 지정
+python run_tracker.py tracker_name parameter_name --dataset_name dataset_name --sequence sequence --debug debug --threads threads (## ex: python run_tracker.py atom default uav --sequence uav_bike1 --debug 0)
 
 ## Run the tracker on a set of datasets 
 python run_experiment.py experiment_module experiment_name --dataset_name dataset_name --sequence sequence  --debug debug --threads threads
