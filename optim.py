@@ -1,3 +1,5 @@
+# optim.py: ATOM의 핵심인 최적화 문제 정의. ATOM이 Discriminative Correlation Filter(DCF)를 학습하는 과정에서 filter(필터)와 projetction matrix(차원 축소용 투영 행렬)을 동시에 최적화.
+    
 import torch
 from pytracking import optimization, TensorList, operation
 import math
