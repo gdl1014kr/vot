@@ -1,3 +1,6 @@
+# atom.py: ATOM Tracker의 main rogic. target을 initialize 하고 매 frame마다 tracking, IOU prediction을 통해 bounding box를 refine(refine_target_box)
+
+FactorizedConvProblem이 이 동시 최적화 문제를, ConvProblem이 필터만 최적화하는 문제를 정의.
 from pytracking.tracker.base import BaseTracker
 import torch
 import torch.nn.functional as F
