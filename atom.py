@@ -1,4 +1,5 @@
 # atom.py: ATOM Tracker의 main rogic. target을 initialize 하고 매 frame마다 tracking, IOU prediction을 통해 bounding box를 refine(refine_target_box)
+Gauss-Newton + Conjugate Gradient로 최적화
 
 from pytracking.tracker.base import BaseTracker
 import torch
