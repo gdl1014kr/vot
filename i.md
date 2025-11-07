@@ -41,7 +41,7 @@ python run_webcam.py tracker_name parameter_name (## ex: python run_webcam.py di
 python run_tracker.py tracker_name parameter_name --dataset_name dataset_name --sequence sequence --debug debug --threads threads (## ex: python run_tracker.py atom default --dataset_name uav --sequence uav_bike3 --debug 0 --threads 0, python run_tracker.py atom default --dataset_name uav --sequence uav_car13 --debug 3)
 
 ## Run the tracker on a set of datasets 
-python run_experiment.py experiment_module experiment_name --dataset_name dataset_name --sequence sequence  --debug debug --threads threads
+python run_experiment.py experiment_module experiment_name --dataset_name dataset_name --sequence sequence  --debug debug --threads threads(## ex: python run_experiment.py myexperiments uav_test --debug 0 --threads 4)
 
 ## Run the tracker on a video file => This is done using the run_video script.
 python run_video.py tracker_name parameter_name videofile --optional_box optional_box --debug debug (## ex: python run_video.py dimp dimp50 /home/username/my_video.mp4 --optional_box [150,200,75,100] --debug 1) => 자동
