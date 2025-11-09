@@ -40,7 +40,7 @@ python run_webcam.py tracker_name parameter_name (## ex: python run_webcam.py di
 ## Run the tracker on some dataset sequence => This is done using the run_tracker script. => local.py에서 path 수정(ex: anno, data_seq 폴더 경로 직전까지 지정. dataset이 uav라면, settings.uav_path = '/home/dl/pytracking/pytracking/UAV123' 지정
 python run_tracker.py tracker_name parameter_name --dataset_name dataset_name --sequence sequence --debug debug --threads threads (## ex: python run_tracker.py atom default --dataset_name uav --sequence uav_bike3 --debug 0 --threads 0, python run_tracker.py atom default --dataset_name uav --sequence uav_car13 --debug 3)
 
-## Run the tracker on a set of datasets 
+## Run the tracker on a set of datasets (local.py 코드에서 dataset 경로(settings.uav_path)에 맞게 수정
 python run_experiment.py experiment_module experiment_name --dataset_name dataset_name --sequence sequence  --debug debug --threads threads(## ex: python run_experiment.py myexperiments uav_test --debug 0 --threads 4)
 
 ## Run the tracker on a video file => This is done using the run_video script.
