@@ -22,6 +22,7 @@ cd ..
 cd pytracking
 pip install matplotlib pandas tqdm tb-nightly visdom scikit-image tikzplotlib gdown cython
 pip install pycocotools lvis jpeg4py
+pip install timm
 
 # OpenCV는 Jetson 호환성을 위해 headless 버전을 권장합니다.
 pip install opencv-python-headless
