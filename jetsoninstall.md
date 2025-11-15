@@ -1,3 +1,4 @@
+# jetpack 6.2.1 (L4T R36.3)에 맞는 환경 설정
 git clone https://github.com/visionml/pytracking.git
 cd pytracking
 pip install https://developer.download.nvidia.com/compute/redist/jp/v61/pytorch/torch-2.5.0a0+872d972e41.nv24.08.17622132-cp310-cp310-linux_aarch64.whl
@@ -32,6 +33,5 @@ pip install spatial-correlation-sampler
 
 sudo apt-get install ninja-build libturbojpeg
 
-# jetpack 6.2.1 (L4T R36.3)에 맞는 환경 설정
 
 
