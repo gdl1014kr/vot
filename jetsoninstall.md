@@ -32,6 +32,7 @@ pip install opencv-python-headless
 pip install spatial-correlation-sampler
 
 sudo apt-get install ninja-build libturbojpeg
+pip install einops
 
 # (pytracking) 환경에 설치된 NumPy 2.x 버전이 PyTorch 2.x 및 기타 C++ 모듈과 호환되지 않기 때문에 NumPy 1.x 버전대의 최신 버전으로 다운그레이드
 pip install "numpy<2"
