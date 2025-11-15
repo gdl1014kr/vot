@@ -33,5 +33,6 @@ pip install spatial-correlation-sampler
 
 sudo apt-get install ninja-build libturbojpeg
 
+pip install "numpy<2"
 
 
